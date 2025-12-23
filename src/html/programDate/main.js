@@ -159,7 +159,7 @@ programDateForm.addEventListener("submit", (event) => {
     seconds--;
     if (seconds <= 0) {
       clearInterval(countdownInterval);
-      localStorage.setItem("appointmentCode", res.validCode);
+      localStorage.setItem("appointmentCode", JSON.stringify(res.validCode));
       window.location.href = `../appointmentInfo/index.html`;
     }
   }, 1000);
