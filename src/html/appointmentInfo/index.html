@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    Appointment Info
+  </title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous"
+  />
+
+</head>
+<body>
+
+
+
+
+<main>
+  <section
+    class="appointment-info d-flex flex-column justify-content-start mt-5 align-items-center vh-100"
+  >
+    <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Library</li>
+      </ol>
+    </nav>
+    <div
+      class="appointment-info__container w-100 shadow-lg rounded-4 p-5"
+      style="max-width: 360px"
+      id="appointmentInfoContainer"
+    >
+      <h2 class="mb-4 text-center">Información de la Cita</h2>
+      <div id="appointmentDetails">
+        <!-- Appointment details will be populated here -->
+      </div>
+    </div>
+  </section>
+</main>
+<script src="./main.js" type="module"></script>
+</body>
+</html>

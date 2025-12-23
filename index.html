@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Podologia</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/src/main.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent position-absolute top-0 start-0 w-100 z-3 py-0">
+      <div class="container py-5 px-4 px-lg-5">
+        <a class="navbar-brand d-flex align-items-center" href="/index.html">
+          <img
+            src="/public/images/piesLogo.png"
+            alt="logo de pies"
+            width="64"
+            height="64"
+            class="d-inline-block align-text-center"
+          />
+          <span class="ps-2 title-text fs-2">Onicocare</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto gap-4">
+            <li class="nav-item">
+              <a class="nav-link text-white" aria-current="page" href="#">INICIO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">SOBRE NOSOTROS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">ACERCA DE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">CONTACTO</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/src/html/programDate/index.html">
+                <button class="btn btn-light p-4">Agendar cita</button>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div
+        id="carouselExampleAutoplaying"
+        class="carousel slide "
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner position-relative">
+          <div class="carousel-item position-relative active">
+            <img
+              src="/public/images/pie_pagina_1.jpg"
+              class="d-block w-100"
+              style="height: 100vh; object-fit: cover"
+              alt="..."
+            />
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-lg-flex bg-theme-primary bg-opacity-50">
+              <div
+                class="d-lg-flex flex-column justify-content-center align-items-start text-start h-100 p-3 pe-5 ms-auto"
+                style="max-width: 700px"
+              >
+                <h4 class="text-white fw-bold" style="font-size: 48px;">Cuidado Profesional de tus Pies</h4>
+                <p class="text-white mb-4">
+                  En Onicocare, nos dedicamos a brindar el mejor cuidado
+                  podológico para mantener tus pies saludables y felices.
+                </p>
+                <button class="btn btn-primary" type="button">
+                  Agendar cita
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item position-relative">
+            <img
+              src="/public/images/pie_pagina_2.jpg"
+              class="d-block w-100"
+              style="height: 100vh; object-fit: cover"
+              alt="..."
+            />
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-lg-flex bg-theme-primary bg-opacity-50">
+              <div
+                class="d-lg-flex flex-column justify-content-center align-items-start text-start h-100 p-3 ms-auto"
+                style="max-width: 700px"
+              >
+                <h4 class="text-white fw-bold" style="font-size: 48px;">Cuidado Profesional de tus Pies</h4>
+                <p class="text-white mb-4">
+                  En Onicocare, nos dedicamos a brindar el mejor cuidado
+                  podológico para mantener tus pies saludables y felices.
+                </p>
+                <button class="btn btn-primary" type="button">
+                  Agendar cita
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item position-relative">
+            <img
+              src="/public/images/pie_pagina_3.jpg"
+              class="d-block w-100"
+              style="height: 100vh; object-fit: cover"
+              alt="..."
+            />
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-lg-flex bg-theme-primary bg-opacity-50">
+              <div
+                class="d-lg-flex flex-column justify-content-center align-items-start text-start h-100 p-3 ms-auto"
+                style="max-width: 700px"
+              >
+                <h4 class="text-white fw-bold" style="font-size: 48px;">Cuidado Profesional de tus Pies</h4>
+                <p class="text-white mb-4">
+                  En Onicocare, nos dedicamos a brindar el mejor cuidado
+                  podológico para mantener tus pies saludables y felices.
+                </p>
+                <button class="btn btn-primary" type="button">
+                  Agendar cita
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="position-absolute top-50 start-0 translate-middle-y">
+           <div class="d-flex flex-column gap-3 ps-lg-4 px-3">
+             <div
+               class="d-flex flex-column justify-content-center align-items-start h-100 p-3 bg-dark bg-opacity-25 bg-theme-primary rounded-2 readMore active"
+               style="max-width: 350px"
+             >
+               <h2 class="text-white fs-5 fw-bold">
+                 Onicomicosis: Causas, sintomas y tratamientos
+               </h2>
+               <p class="text-white">
+                 El cuidado de las uñas es esencial para mantener una buena salud
+                 podológica.
+               </p>
+               
+             </div>
+ 
+             <div
+               class="d-flex flex-column justify-content-center align-items-start h-100 p-3 bg-dark bg-opacity-25 bg-theme-primary rounded-2 readMore "
+               style="max-width: 350px"
+             >
+               <h2 class="text-white fs-5 fw-bold">Onicocriptosis</h2>
+               <p class="text-white">
+                 La onicocriptosis, comunmente conocida como uña encarnada, es
+                 una condicion dolorosa que afecta a muchas personas.
+               </p>
+              </div>
+ 
+             <div
+               class="d-flex flex-column justify-content-center align-items-start h-100 p-3 bg-dark bg-opacity-25 bg-theme-primary rounded-2 readMore "
+               style="max-width: 350px"
+             >
+               <h2 class="text-white fs-5 fw-bold">
+                 Tratamientos de Quiropodia (Cuidados Básicos)
+               </h2>    
+               <p class="text-white">
+                 La quiropodia es una especialidad de la podologia que se enfoca
+                 en el cuidado y tratamiento de los pies.
+               </p>
+             </div>
+           </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="call-to-action py-5 mt-0 mt-lg-0">
+          <div class="container d-flex justify-content-center align-items-center">
+            <div class="d-flex h-100 p-3 bg-theme-primary">
+              <form>
+                <div class="mb-3">
+                  <label for="emailInput" class="form-label text-white"
+                    >Suscribete a nuestro boletin</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="emailInput"
+                    placeholder="Ingresa tu correo electronico"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Suscribirse
+                </button>
+              </form>
+            </div>
+          </div>
+      </div>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/main.js"></script>
+  </body>
+</html>

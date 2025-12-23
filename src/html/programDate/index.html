@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Program Date</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <main>
+      <section
+        class="program-date d-flex flex-column justify-content-start mt-5 align-items-center vh-100"
+      >
+        <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Library</li>
+          </ol>
+        </nav>
+        <div
+          class="program-date__container w-100 shadow-lg rounded-4 p-5"
+          style="max-width: 360px"
+          id="programDateContainer"
+        >
+          <h2 class="mb-4 text-center">Agendar Cita</h2>
+
+          <form class="d-flex flex-column gap-3" id="especialytiesForm">
+            <label for="especialtySelect" class="form-label"
+              >Seleccione una Especialidad</label
+            >
+            <select
+              id="especialtySelect"
+              class="form-select"
+              data-control="infoCite"
+              name="specialty"
+              required
+            >
+              <option value="" disabled selected>-- Seleccione --</option>
+              <option value="Podologia Clinica">Podologia Clinica</option>
+              <option value="Ortopodologia">Ortopodología</option>
+              <option value="Podologia Geriatrica">Podología Geriátrica</option>
+              <option value="Cirugia Podologica">Cirugía Podológica</option>
+              <option value="Podologia General">Podologia General</option>
+              <option value="Podologia Deportiva">Podología Deportiva</option>
+              <option value="Podologia Pediatrica">Podología Pediátrica</option>
+              <option value="Cirugia Podologica">Cirugía Podológica</option>
+            </select>
+
+            <div class="mb-3">
+              <label for="Specialist" class="form-label"
+                >Seleccione un Especialista</label
+              >
+              <ul class="list-group list-group-flush" id="listSpecialists"></ul>
+            </div>
+
+            <div class="mb-3">
+              <label for="date" class="form-label">Fecha de la Cita</label>
+              <input
+                type="date"
+                class="form-control"
+                id="date"
+                name="date"
+                data-control="infoCite"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Seleccione una Hora disponible</label>
+              <select
+                id="timeSelect"
+                class="form-select"
+                data-control="infoCite"
+                name="timeSelect"
+                required
+              >
+                <option value="">-- Seleccione --</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              Continuar
+            </button>
+          </form>
+
+          <form class="d-flex flex-column gap-3" id="programDateForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre Completo</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Ingrese su nombre completo"
+                data-control="infoCite"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Ingrese su correo electrónico"
+                data-control="infoCite"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Número de Teléfono</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                name="phone"
+                placeholder="Ingrese su número de teléfono"
+                data-control="infoCite"
+                required
+              />
+            </div>
+
+            <div
+              class="position-fixed bottom-0 start-50 bg-white p-3 px-4 shadow-lg w-100"
+              id="specialityEdit"
+              style="transform: translate(-50%, 100%)"
+            >
+              <div class="d-flex flex-column gap-3">
+                <span>
+                  Especialidad Seleccionada:
+                  <strong id="selectedSpecialtyDisplay"></strong>
+                </span>
+
+                <div>
+                  <span>Especialista Asignado:</span>
+                  <strong id="assignedSpecialistDisplay"></strong>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-secondary btn-sm w-100"
+                  id="changeSpecialtyBtn"
+                >
+                  Cambiar Especialidad
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="/src/html/programDate/main.js"></script>
+  </body>
+</html>

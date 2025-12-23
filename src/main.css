@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  --color-primary: #f0f4f8;
+  --color-secondary: #52cbfb55; /*Color azul moderno */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-primary);
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+p, li {
+  line-height: 1.6;
+  color: #666;
+}
+
+.bg-theme-primary {
+  background-color: var(--color-secondary) !important;
+  color: #fff !important;
+}
+
+
+.carrousel-item img {
+  filter: brightness(70%) !important;
+}
+
+.readMore {
+  opacity: 0.7;
+}
+
+.readMore.active {
+  opacity: 1;
+  background-color: #1f66ff !important;
+}
