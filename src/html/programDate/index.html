@@ -15,7 +15,7 @@
   <body>
     <main>
       <section
-        class="program-date d-flex flex-column justify-content-start mt-5 align-items-center vh-100"
+        class="program-date d-flex flex-column justify-content-start mt-5 align-items-center min-vh-100 px-5 py-4"
       >
         <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -30,7 +30,7 @@
         >
           <h2 class="mb-4 text-center">Agendar Cita</h2>
 
-          <form class="d-flex flex-column gap-3" id="especialytiesForm">
+          <form id="especialytiesForm">
             <label for="especialtySelect" class="form-label"
               >Seleccione una Especialidad</label
             >
@@ -87,7 +87,7 @@
             </button>
           </form>
 
-          <form class="d-flex flex-column gap-3" id="programDateForm">
+          <form id="programDateForm">
             <div class="mb-3">
               <label for="name" class="form-label">Nombre Completo</label>
               <input
@@ -126,8 +126,20 @@
               />
             </div>
 
+            <div class="mb-3">
+              <label for="notes" class="form-label">Notas Adicionales</label>
+              <textarea
+                class="form-control"
+                id="notes"
+                name="notes"
+                rows="3"
+                placeholder="Ingrese cualquier nota adicional"
+                data-control="infoCite"
+              ></textarea>
+            </div>
+
             <div
-              class="position-fixed bottom-0 start-50 bg-white p-3 px-4 shadow-lg w-100"
+              class="position-fixed bottom-0 start-50 bg-white p-3 px-5 shadow-lg w-100"
               id="specialityEdit"
               style="transform: translate(-50%, 100%)"
             >
@@ -144,10 +156,10 @@
 
                 <button
                   type="submit"
-                  class="btn btn-secondary btn-sm w-100"
+                  class="btn btn-success btn-sm w-100"
                   id="changeSpecialtyBtn"
                 >
-                  Cambiar Especialidad
+                  Finalizar Cita
                 </button>
               </div>
             </div>

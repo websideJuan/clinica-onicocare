@@ -181,6 +181,22 @@ export const clear = () => {
   agenda.length = 0;
 } 
 
+export const update = (validCode, updatedItem) => {
+  const index = storedAgenda.findIndex(item => item.validCode === validCode);
+  if (index === -1) {
+    return {
+      success: false,
+      message: 'No appointment found with the provided valid code'
+    };
+  }
+  storedAgenda[index] = { ...storedAgenda[index], ...updatedItem };
+  localStorage.setItem('agenda', JSON.stringify(storedAgenda));
+  return {  
+    success: true,
+    message: 'Appointment updated successfully'
+  };
+}
+
 export const get = ({ database, specialty }) => {
   if (database === 'agenda') {
     return storedAgenda;
@@ -199,5 +215,12 @@ export const get = ({ database, specialty }) => {
 }
 
 export const getByValidCode = (validCode) => {
-  return storedAgenda.find(item => item.validCode === validCode);
+  if (validCode === undefined) {
+    return undefined;
+  }
+
+  const agendaFinded = storedAgenda.find(item => item.validCode === validCode)
+  console.log(agendaFinded ? agendaFinded : null);
+  
+  return agendaFinded ? agendaFinded : 'null';
 }

@@ -5,6 +5,8 @@ const specialityEdit = document.querySelector("#specialityEdit");
 const inputsCollection = document.querySelectorAll("[data-control='infoCite']");
 const listSpecialists = document.querySelector("#listSpecialists");
 const programDateContainer = document.querySelector("#programDateContainer");
+const selectedSpecialtyDisplay = document.querySelector("#selectedSpecialtyDisplay");
+const assignedSpecialistDisplay = document.querySelector("#assignedSpecialistDisplay");
 const storedSpecialty =
   JSON.parse(localStorage.getItem("selectedSpecialty")) || {};
 
@@ -58,6 +60,12 @@ inputsCollection.forEach((input) => {
         const specialists = get({ database: "specialist" });
         
         const dateValue = input.value;
+
+        if (dateValue < new Date().toISOString().split("T")[0]) {
+          alert("Please select a valid date.");
+          input.value = "";
+          return;
+        }
         
         const specialist = specialists.find(
           (specialist) => specialist.id === parseInt(storedSpecialty.specialistId)
@@ -125,6 +133,15 @@ especialytiesForm.addEventListener("submit", (event) => {
   especialytiesForm.classList.add("d-none");
   programDateForm.classList.remove("d-none");
   specialityEdit.style.transform = "translate(-50%, 0)";
+
+  storedSpecialty["specialty"] = selectedSpecialty.value;
+  localStorage.setItem("selectedSpecialty", JSON.stringify(storedSpecialty));
+  selectedSpecialtyDisplay.textContent = selectedSpecialty.value;
+  const assignedSpecialist = get({
+    database: "specialties",
+    specialty: selectedSpecialty.value,
+  })[0];
+  assignedSpecialistDisplay.textContent = assignedSpecialist.name;
   especialytiesForm.reset();
 });
 
@@ -140,6 +157,11 @@ programDateForm.addEventListener("submit", (event) => {
     telephone: storedSpecialty.phone,
     email: storedSpecialty.email,
     specialistId: storedSpecialty.specialistId,
+    pay: false,
+    paymentDate: null,
+    codeTransaction: null,
+    patientAge: storedSpecialty.age || null,
+    patientNotes: storedSpecialty.notes || null,
   });
 
   localStorage.removeItem("selectedSpecialty");
@@ -147,7 +169,10 @@ programDateForm.addEventListener("submit", (event) => {
 
   let seconds = 10;
 
-  programDateContainer.innerHTML = `<div class="alert alert-success" role="alert">
+  programDateContainer.innerHTML = `
+  <div class="alert alert-success" role="alert">
+    <img src="../../../public/images/congratulation.png" alt="Congratulations" class="img-fluid mb-3" width="100" height="100"/>
+    <br />
     Cita agendada con éxito. Su código de validación es: <strong>${res.validCode}</strong><br />
     Por favor, guarde este código para futuras referencias.
     
@@ -159,7 +184,7 @@ programDateForm.addEventListener("submit", (event) => {
     seconds--;
     if (seconds <= 0) {
       clearInterval(countdownInterval);
-      localStorage.setItem("appointmentCode", JSON.stringify(res.validCode));
+      sessionStorage.setItem("appointmentCode", res.validCode);
       window.location.href = `../appointmentInfo/index.html`;
     }
   }, 1000);
