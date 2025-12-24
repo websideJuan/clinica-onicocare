@@ -1,25 +1,52 @@
-import { getByValidCode, get, update } from "../../../agenda.js";
-const code = sessionStorage.getItem("appointmentCode");
-const specialist = get({ database: "specialist" });
+import { getByValidCode, getSpecialistById } from "../../../agenda.js";
+const APPOINTMENT_CODE_KEY = "appointmentCode";
 const appointmentInfoContainer = document.getElementById(
   "appointmentInfoContainer"
 );
 
+function loadAppointmentInfo() {
+  const code = getStoredCode();
 
-document.addEventListener("DOMContentLoaded", () => {
   if (!code) {
-    sessionStorage.setItem("appointmentCode", "undefined");
-  } else {
-    createPaymentAlert(code)
+    renderForm();
+    bindCodeForm();
+    return;
   }
 
+  const appointment = getByValidCode(code);
 
-});
+  if (!appointment) {
+    renderForm();
+    bindCodeForm();
+    return;
+  }
 
-function loadAppointmentInfo(code) {
-  
-  if (code === "undefined") {
-    appointmentInfoContainer.innerHTML = `
+  const specialist = getSpecialistById({ id: appointment.specialistId });
+
+  renderAppointmentDetails(appointment, specialist);
+  createPaymentAlert(appointment);
+}
+
+const createPaymentAlert = (appointment) => {
+  if (appointment.pay === false) {
+    /*
+        create a modal alert at the top of the body to notify the user that their appointment is pending payment
+      */
+
+    document.body.insertAdjacentHTML(
+      "afterbegin",
+      `
+        <div class="alert alert-warning alert-dismissible fade show m-0" role="alert">
+          <strong>Atención!</strong> Tu cita está pendiente de pago. Por favor, realiza el <a href="../payment/index.html">pago</a> para confirmar tu cita.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `
+    );
+  }
+};
+
+const renderForm = () => {
+  appointmentInfoContainer.innerHTML = `
       <div class="card">
         <div class="card-body">
           <form id="appointmentCodeForm">
@@ -32,20 +59,29 @@ function loadAppointmentInfo(code) {
         </div>
       </div>
     `;
-  } else if (code) {
-    const appointment = getByValidCode(code);
-    console.log(appointment);
-    
-    appointmentInfoContainer.innerHTML = `
+};
+
+const bindCodeForm = () => {
+  document
+    .querySelector("#appointmentCodeForm")
+    ?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const code = e.target.querySelector("input").value.trim();
+      const appointment = getByValidCode(code);
+
+      if (!appointment) return;
+
+      
+      setStoredCode(appointment.validCode);
+      loadAppointmentInfo();
+    });
+};
+
+const renderAppointmentDetails = (appointment, specialist) => {
+  appointmentInfoContainer.innerHTML = `
       <div class="mb-4 position-relative"> 
-        <h5>
-          Información de la cita
-        </h5>
-        <p><strong>
-          ID de validación:
-        </strong> ${
-          appointment.validCode
-        }</p>
+        <h5>Información de la cita</h5>
+        <p><strong>ID de validación:</strong> ${appointment.validCode}</p>
         <div class="position-absolute top-50 end-0 translate-middle-y">
           <img src="../../../public/images/Appointment.png" alt="Appointment Icon" width="50" height="50">
         </div>
@@ -56,16 +92,10 @@ function loadAppointmentInfo(code) {
           <div class="card">
             <div class="card-body">
               <img src="${
-                specialist.find((s) => s.id === parseInt(appointment.specialistId))
-                  .image
+                specialist.image
               }" alt="Specialist Image" class="img-fluid mb-3" width="100" height="50">
-              <p><strong>Nombre:</strong> ${
-                specialist.find((s) => s.id === parseInt(appointment.specialistId)).name
-              }</p>
-              <p><strong>Especialidad:</strong> ${
-                specialist.find((s) => s.id === parseInt(appointment.specialistId))
-                  .specialty
-              }</p>
+              <p><strong>Nombre:</strong> ${specialist.name}</p>
+              <p><strong>Especialidad:</strong> ${specialist.specialty}</p>
             </div>
           </div>
         </div>
@@ -85,11 +115,20 @@ function loadAppointmentInfo(code) {
                   </ul>
                 </div>
               </div>
+              
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Nombre:</strong> ${appointment.fullname}</li>
-                <li class="list-group-item"><strong>Edad:</strong> ${appointment.patientAge || "N/A"}</li>
-                <li class="list-group-item"><strong>Teléfono:</strong> ${appointment.telephone}</li>
-                <li class="list-group-item"><strong>Correo electrónico:</strong> ${appointment.email}</li>
+                <li class="list-group-item"><strong>Nombre:</strong> ${
+                  appointment.fullname
+                }</li>
+                <li class="list-group-item"><strong>Edad:</strong> ${
+                  appointment.patientAge || "N/A"
+                }</li>
+                <li class="list-group-item"><strong>Teléfono:</strong> ${
+                  appointment.telephone
+                }</li>
+                <li class="list-group-item"><strong>Correo electrónico:</strong> ${
+                  appointment.email
+                }</li>
               </ul>
               <button class="btn btn-link">Consular ficha</button>
             </div>
@@ -106,46 +145,34 @@ function loadAppointmentInfo(code) {
           </div>
         </div>
       </div>
+    `;
+};
 
-    `;
-  } else {
-    appointmentInfoContainer.innerHTML = `
-      <p>No appointment found for the provided code.</p>
-      <a href="index.html" class="btn btn-primary">Schedule an Appointment</a>   
-    `;
+const renderError = () => {
+  appointmentInfoContainer.innerHTML += `
+    <div class="alert alert-danger mt-4" role="alert">
+      Código de validación inválido. Por favor, inténtalo de nuevo.
+    </div>
+  `;
+
+  setTimeout(() => {
+    clearError();
+  }, 5000);
+};
+
+const clearError = () => {
+  const errorAlert = appointmentInfoContainer.querySelector(
+    ".alert.alert-danger"
+  );
+  if (errorAlert) {
+    errorAlert.remove();
   }
-}
+};
 
-loadAppointmentInfo(code);
+const getStoredCode = () => sessionStorage.getItem(APPOINTMENT_CODE_KEY);
 
-document.querySelector("#appointmentCodeForm")?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const inputCode = document.getElementById("appointmentCodeInput").value.trim();
-  const appointment = getByValidCode(inputCode);
-  console.log(appointment);
-  
-  sessionStorage.setItem("appointmentCode", appointment.validCode);
-  loadAppointmentInfo(appointment.validCode);
-  createPaymentAlert(appointment.validCode);
-});
+const setStoredCode = (code) => {
+  sessionStorage.setItem(APPOINTMENT_CODE_KEY, code);
+};
 
-
-const createPaymentAlert = (code) => {
-  const appointment = getByValidCode(code);
-    
-    if (appointment.pay === false) {
-      /*
-        create a modal alert at the top of the body to notify the user that their appointment is pending payment
-      */
-
-      document.body.insertAdjacentHTML(
-        "afterbegin",
-        `
-        <div class="alert alert-warning alert-dismissible fade show m-0" role="alert">
-          <strong>Atención!</strong> Tu cita está pendiente de pago. Por favor, realiza el <a href="../payment/index.html">pago</a> para confirmar tu cita.
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        `
-      );
-    }
-}
+loadAppointmentInfo();
