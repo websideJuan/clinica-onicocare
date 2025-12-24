@@ -19,7 +19,7 @@ function loadAppointmentInfo(code) {
           appointment.validCode
         }</p>
         <div class="position-absolute top-50 end-0 translate-middle-y">
-          <img src="../../public/images/appointment.png" alt="Appointment Icon" width="50" height="50">
+          <img src="../../../public/images/appointment.png" alt="Appointment Icon" width="50" height="50">
         </div>
       </div>
       <div class="d-grid gap-4">
