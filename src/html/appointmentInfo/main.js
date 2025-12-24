@@ -10,31 +10,58 @@ function loadAppointmentInfo(code) {
   const appointment = getByValidCode(code);
 
   if (appointment) {
-    appointmentInfoContainer.innerHTML = `  
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title">Appointment Information</h5>
-          <span class="text-muted">Appointment Valid Code: ${appointment.validCode}</span>
+    appointmentInfoContainer.innerHTML = `
+      <div class="mb-4 position-relative"> 
+        <h5>
+          Información de la cita
+        </h5>
+        <p><strong>Código de validación:</strong> ${
+          appointment.validCode
+        }</p>
+        <div class="position-absolute top-50 end-0 translate-middle-y">
+          <img src="/public/images/appointment.png" alt="Appointment Icon" width="50" height="50">
         </div>
-        <div class="card-body">
-        
-          <p><strong>Date:</strong> ${appointment.day}</p>
-          <p><strong>Time:</strong> ${appointment.time}</p>
-          <p><strong>Location:</strong> ${appointment.location}</p>
-          <p><strong>Description:</strong> ${appointment.description}</p>
+      </div>
+      <div class="d-grid gap-4">
+        <div>
+          <h5 class="fw-light mb-3">Especialista</h5>
+          <div class="card">
+            <div class="card-body">
+              <img src="${
+                specialist.find((s) => s.id === parseInt(appointment.specialistId))
+                  .image
+              }" alt="Specialist Image" class="img-fluid mb-3" width="100" height="50">
+              <p><strong>Nombre:</strong> ${
+                specialist.find((s) => s.id === parseInt(appointment.specialistId)).name
+              }</p>
+              <p><strong>Especialidad:</strong> ${
+                specialist.find((s) => s.id === parseInt(appointment.specialistId))
+                  .specialty
+              }</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h5 class="fw-light mb-3">Paciente</h5>
+          <div class="card">
+            <div class="card-body">
+              <p><strong>Nombre:</strong> ${appointment.fullname}</p>
+              <p><strong>Edad:</strong> ${appointment.patientAge || "N/A"}</p>
+              <p><strong>Teléfono:</strong> ${appointment.phone}</p>
+              <p><strong>Correo electrónico:</strong> ${appointment.email}</p>
 
-          <p><strong>Specialty:</strong> ${appointment.service}</p>
-          <p><strong>Specialist ID:</strong> ${specialist.find(s => s.id === parseInt(appointment.specialistId))?.name || "Unknown"}</p>
-
-
-          <div class="d-flex justify-content-between">
-            <button id="editButton" class="btn btn-success mt-4">
-              Edit 
-            </button>
-
-            <button id="cancelButton" class="btn btn-danger mt-4">
-              Cancel 
-            </button>
+              <p><button class="btn btn-link">Consular ficha del paciente</button></p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h5 class="fw-light mb-3">Información de la cita</h5>
+          <div class="card">
+            <div class="card-body">
+              <p><strong>Fecha:</strong> ${appointment.day}</p>
+              <p><strong>Hora:</strong> ${appointment.time}</p>
+              <p><strong>Síntomas:</strong> ${appointment.symptoms}</p>
+            </div>
           </div>
         </div>
       </div>
